@@ -25,11 +25,13 @@ async def welcome(message: types.Message):
 
 @dp.message_handler(commands=['cat', 'random'])
 async def random_cat(message: types.Message):
-    captions = ["Hold the cat!", "What lovely eyes! :eyes:", "Here's the cat!"]
+    captions = ["Hold the cat!", "What lovely eyes! :eyes:",
+                "Here's the cat!", "Catch it!"]
     caption = random.choice(captions)
     cat = CatFetcher()
     asyncio.create_task(cat.fetch_cat())
-    photo = open(('cat.jpg').encode('utf-8'), 'rb')
+    with open(('cat.jpg').encode('utf-8'), 'rb') as f:
+        photo = f.read()
     # _id = random.random()
     await bot.send_photo(chat_id=message.chat.id,
                          # photo = f'https://thiscatdoesnotexist.com/?{_id}',
