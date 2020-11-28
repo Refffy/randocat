@@ -6,10 +6,10 @@ import io
 
 class CatFetcher:
     def __init__(self):
-        self.__id = random.random()
-        self.__link = f'https://thiscatdoesnotexist.com/?{self.__id}'
+        self._id = random.random()
+        self._link = f'https://thiscatdoesnotexist.com/?{self._id}'
 
     async def fetch_cat(self):
         async with aiohttp.ClientSession() as session:
-            async with session.get(self.__link) as res:
+            async with session.get(self._link) as res:
                 return Image.open(io.BytesIO(await res.read())).save('cat.jpg')
