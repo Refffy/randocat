@@ -1,5 +1,6 @@
+from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram import Bot, Dispatcher, executor, types
-from cat_handler import CatFetcher
+from cat_handler import fetch_cat
 from emoji import emojize
 import asyncio
 import random
@@ -28,8 +29,7 @@ async def random_cat(message: types.Message):
     captions = ["Hold the cat!", "What lovely eyes! :eyes:",
                 "Here's the cat!", "Catch it!"]
     caption = random.choice(captions)
-    cat = CatFetcher()
-    asyncio.create_task(cat.fetch_cat())
+    asyncio.create_task(fetch_cat())
     with open(('cat.jpg').encode('utf-8'), 'rb') as f:
         photo = f.read()
     # _id = random.random()
